@@ -24,5 +24,12 @@ def init_db(dbfile):
             FOREIGN KEY (book_id) REFERENCES books(id)
         )
     """)
+    conn.commit()
+
+    cursor.execute("""CREATE TABLE networkModes(
+            bool server NOT NULL DEFAULT 0
+        )
+    """)
+    conn.commit()
 
     conn.close()
