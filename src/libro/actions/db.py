@@ -27,8 +27,8 @@ def init_db(dbfile):
     conn.commit()
 
     cursor.execute("""CREATE TABLE networkModes(
-            bool server NOT NULL DEFAULT 0
-        )
+            server BOOLEAN NOT NULL DEFAULT 0
+        );
     """)
     conn.commit()
 

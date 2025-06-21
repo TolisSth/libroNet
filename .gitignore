@@ -1,5 +1,8 @@
+__pycache__/
 data/
 libro.db
+libronet.db
+libronet-2.db
 libro.bak
 
 .ruff_cache

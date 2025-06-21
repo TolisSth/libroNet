@@ -19,6 +19,11 @@ def init_args() -> Dict:
 
     # Create subparsers for commands
     subparsers = parser.add_subparsers(dest="command", help="Commands")
+    
+    # Network command with its specific arguments
+    network = subparsers.add_parser("network", help="Set network mode")
+    network.add_argument("--server", action="store_true", help="Set network mode to server") 
+    network.add_argument("--client", action="store_true", help="Set network mode to client")
 
     # Report command with its specific arguments
     report = subparsers.add_parser("report", help="Show reports")
@@ -43,7 +48,6 @@ def init_args() -> Dict:
     imp.add_argument("file", type=str, help="Goodreads CSV export file")
 
     args = vars(parser.parse_args())
-
     if args["version"]:
         print(f"libro v{__version__}")
         sys.exit()
@@ -59,7 +63,6 @@ def init_args() -> Dict:
         args["year"] = datetime.now().year
 
     return args
-
 
 def get_db_loc() -> Path:
     """Figure out where the libro.db file is.

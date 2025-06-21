@@ -5,7 +5,7 @@ from pathlib import Path
 from libro.config import init_args
 from libro.actions.show import show_books
 from libro.actions.report import report
-from libro.actions.modify import add_book, edit_book
+from libro.actions.modify import add_book, edit_book, set_network_mode
 from libro.actions.db import init_db
 from libro.actions.importer import import_books
 
@@ -45,6 +45,8 @@ def main():
                 report(db, args)
             case "import":
                 import_books(db, args)
+            case "network": 
+                set_network_mode(db, args)
             case _:
                 print("Not yet implemented")
 

@@ -16,6 +16,31 @@ style = Style.from_dict(
     }
 )
 
+def set_network_mode(db,args):
+    session = PromptSession()
+    console = Console()
+
+    try:
+        cursor = db.cursor()
+
+        # Check if a row already exists
+        cursor.execute("SELECT COUNT(*) FROM networkModes")
+        exists = cursor.fetchone()[0]
+
+        if exists:
+            # Update the existing row
+            cursor.execute("UPDATE networkModes SET server = ?", (int(args["server"]),))
+        else:
+            # Insert a new row
+            cursor.execute("INSERT INTO networkModes (server) VALUES (?)", (int(args["server"]),))
+
+        db.commit()
+        console.print(f"[green]Network mode set to {'server' if args["server"] else 'client'}.[/green]")
+
+    except Exception as e:
+        console.print(f"[red]Error setting network mode:[/red] {e}")
+    finally:
+        db.close()
 
 def add_book(db, args):
     session = PromptSession(style=style)
